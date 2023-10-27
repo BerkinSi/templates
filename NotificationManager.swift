@@ -30,7 +30,12 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
         }
     }
-
+    /// Checks if notifications are enabled for the app.
+    func areNotificationsEnabled(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            completion(settings.authorizationStatus == .authorized)
+        }
+    }
     // Schedule a local notification
     func scheduleNotification(hour: Int, minute: Int, message: String) {
         let notificationCenter = UNUserNotificationCenter.current()
