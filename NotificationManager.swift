@@ -36,6 +36,11 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             completion(settings.authorizationStatus == .authorized)
         }
     }
+    func hasPendingNotifications(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            completion(!requests.isEmpty)
+        }
+    }
     // Schedule a local notification
     func scheduleNotification(hour: Int, minute: Int, message: String) {
         let notificationCenter = UNUserNotificationCenter.current()
