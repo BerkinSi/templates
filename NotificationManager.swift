@@ -63,4 +63,14 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
         }
     }
+        /// Disables notifications by removing all scheduled ones.
+    func disableNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+        /// Opens the app settings.
+    func redirectToAppSettings() {
+        if let appSettingsUrl = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(appSettingsUrl, options: [:], completionHandler: nil)
+        }
+    }
 }
